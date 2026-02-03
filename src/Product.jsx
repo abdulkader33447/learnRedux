@@ -12,7 +12,8 @@ const Product = () => {
   }, [dispatch]);
 
   const selectore = useSelector((state) => state.products.items?.products);
-  console.log(selectore);
+  // console.log(selectore);
+  const cartSelector = useSelector((state) => state.cart.items);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
@@ -20,7 +21,11 @@ const Product = () => {
         <div
           key={product.id}
           className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md space-y-4 m-10 transition-transform duration-500 hover:scale-105">
-          <img className="transition-transform duration-500 hover:scale-105" src={product.thumbnail} alt="mouse" />
+          <img
+            className="transition-transform duration-500 hover:scale-105"
+            src={product.thumbnail}
+            alt="mouse"
+          />
           <p className="pt-1 px-2 bg-green-100 w-fit rounded-2xl">
             {product.category}
           </p>
@@ -32,16 +37,25 @@ const Product = () => {
             </p>
             <h2>${product.price}</h2>
           </div>
-          <button
-            onClick={() => dispatch(addItem(1))}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-            Add to Cart
-          </button>
-          <button
+
+          {cartSelector.some((item) => item.id === product.id) ? (
+            <button
+              onClick={() => dispatch(removeItem(1))}
+              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-5">
+              Remove from Cart
+            </button>
+          ) : (
+            <button
+              onClick={() => dispatch(addItem(product))}
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ml-5">
+              Add To Cart
+            </button>
+          )}
+          {/* <button
             onClick={() => dispatch(removeItem(1))}
             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-5">
             Remove from Cart
-          </button>
+          </button> */}
         </div>
       ))}
       {/* <img

@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 
 const AddToCart = () => {
-  const selector = useSelector((state) => state.cart.value);
+  const cartSelector = useSelector((state) => state.cart.items);
 
-  console.log(selector,"selector");
+  // console.log(cartSelector, "selector");
 
   return (
     <div>
@@ -23,7 +23,7 @@ const AddToCart = () => {
         </svg>
 
         <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
-          {selector}
+          {cartSelector.length ? cartSelector.length : 0}
         </span>
       </div>
     </div>
