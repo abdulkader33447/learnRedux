@@ -16,10 +16,16 @@ const addToCart = createSlice({
       state.items.push(action.payload);
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
-    removeItem: (state) => {
-      if (state.value > 0) {
-        state.value -= 1;
-      }
+    removeItem: (state, action) => {
+      // if (state.value > 0) {
+      //   state.value -= 1;
+      // }
+
+      const cartData = state.items.filter(
+        (item) => item.id != action.payload.id,
+      );
+      state.items = cartData;
+      localStorage.setItem("cart", JSON.stringify(cartData));
     },
     clearItems: (state) => {
       state.value = 0;

@@ -1,20 +1,24 @@
 import "./App.css";
+import CartList from "./CartList";
 import Header from "./Header";
 import Product from "./Product";
-import {useDispatch} from "react-redux";
-import { clearItems } from "./redux/slice";
+
+// import { useDispatch } from "react-redux";
+// import { clearItems } from "./redux/slice";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
     <>
-      <Header />
-      <button onClick={() => dispatch(clearItems())} className=" mx-auto px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-5">
-        Clear Cart
-      </button>
-      <Product />
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Product />}/>
+          <Route path="/cart" element={<CartList />}/>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

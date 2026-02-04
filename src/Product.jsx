@@ -40,14 +40,14 @@ const Product = () => {
 
           {cartSelector.some((item) => item.id === product.id) ? (
             <button
-              onClick={() => dispatch(removeItem(1))}
-              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-5">
+              onClick={() => dispatch(removeItem(product))}
+              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 ml-5 cursor-pointer">
               Remove from Cart
             </button>
           ) : (
             <button
               onClick={() => dispatch(addItem(product))}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ml-5">
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ml-5 cursor-pointer">
               Add To Cart
             </button>
           )}
